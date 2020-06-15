@@ -100,7 +100,7 @@ time1 = time.clock()
 
 #INITIALIzATION OF NEURAL NETWORK
 
-fits = 2000 #how many iterations we want
+fits = 3000 #how many iterations we want
 
 model = models.Sequential([
   layers.Dense(100, input_shape=(1,), activation='relu'),
