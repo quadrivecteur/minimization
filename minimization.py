@@ -13,7 +13,7 @@ import time
 
 
 
-def energy_compute (abscissa,fonction):
+def energy_compute (abscissa,function):
   hbar = 1
   omega = 1
   m = 1
@@ -21,16 +21,16 @@ def energy_compute (abscissa,fonction):
   b = 5.
 
   #interpolations
-  tck_true = interpolate.splrep(abscissa, fonction, k=3, s=0)                                    #W.F.
-  tck_true_carre = interpolate.splrep(abscissa, fonction*fonction, k=3, s=0)                     #W.F. squared
-  tck_true_x = interpolate.splrep(abscissa, abscissa*abscissa*fonction*fonction, k=3, s=0)       #W.F. squared*x^2
+  tck_true = interpolate.splrep(abscissa, function, k=3, s=0)                                    #W.F.
+  tck_true_carre = interpolate.splrep(abscissa, function*function, k=3, s=0)                     #W.F. squared
+  tck_true_x = interpolate.splrep(abscissa, abscissa*abscissa*function*function, k=3, s=0)       #W.F. squared*x^2
   der_true = interpolate.splev(abscissa, tck_true, der=1)                                        #W.F. derivative
   tck_true_der = interpolate.splrep(abscissa,der_true*der_true, k=3,s=0)                         #W.F. derivative spline 1000
   int_true_carre = interpolate.splint(a,b,tck_true_carre)                                        #integral of W.F. squared
   int_true_x = interpolate.splint(a,b,tck_true_x)                                                #integral of W.F. squared*x^2 (<x^2>)
   int_true_der = interpolate.splint(a,b,tck_true_der)                                            #integral of derivative squared
   #energy
-  Energy = ((-pow(hbar,2)/(2*m))*(fonction[-1]*der_true[-1]-fonction[0]*der_true[0] 
+  Energy = ((-pow(hbar,2)/(2*m))*(function[-1]*der_true[-1]-function[0]*der_true[0] 
                              - int_true_der) + 0.5*m*omega*int_true_x ) / int_true_carre
   return Energy
 
